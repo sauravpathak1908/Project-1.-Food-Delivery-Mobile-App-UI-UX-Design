@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foodie - Food Delivery App</title>
+  <link rel="stylesheet" href="food.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="#" class="logo">Food<span>ie.</span></a>
+
+    <button class="delivery" id="locationBtn" type="button">
+      <span>Deliver to</span>
+      <strong id="deliveryLocation">📍 Select location</strong>
+    </button>
+
+    <div class="nav-actions">
+      <button class="cart-button" id="cartBtn">
+        🛒 Cart <span id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="screen-nav" aria-label="Main navigation">
+    <button class="screen-link active" data-screen-target="home">Home</button>
+    <button class="screen-link" data-screen-target="restaurants">Restaurants</button>
+    <button class="screen-link" data-screen-target="menu">Food Menu</button>
+    <button class="screen-link" data-screen-target="tracking">Track Order</button>
+    <button class="screen-link" data-screen-target="profile">Profile</button>
+    <button class="screen-link" data-screen-target="flowchart">Flowchart</button>
+  </nav>
+
+  <main id="appMain">
+    <section class="app-screen active" id="homeScreen" data-screen="home">
+      <div class="hero">
+      <div class="hero-content">
+        <p class="eyebrow">FAST DELIVERY · FRESH FOOD</p>
+        <h1>Hungry? Your favourite food is just a click away!</h1>
+        <p>Discover delicious meals from your favourite restaurants.</p>
+        <button class="primary-button" data-screen-target="restaurants">Explore Restaurants →</button>
+      </div>
+
+      <div class="hero-image">
+        <img
+          src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=85"
+          alt="Delicious pizza">
+      </div>
+      </div>
+
+      <section class="categories-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">EXPLORE</p>
+            <h2>Food Categories</h2>
+          </div>
+        </div>
+
+        <div class="categories" id="categories">
+          <button class="category active" data-category="All">🍽️<span>All</span></button>
+          <button class="category" data-category="Pizza">🍕<span>Pizza</span></button>
+          <button class="category" data-category="Burger">🍔<span>Burger</span></button>
+          <button class="category" data-category="Indian">🍛<span>Indian</span></button>
+          <button class="category" data-category="Dessert">🍰<span>Dessert</span></button>
+          <button class="category" data-category="Drinks">🥤<span>Drinks</span></button>
+        </div>
+      </section>
+
+      <section class="benefits">
+        <div>🚀 <strong>Fast Delivery</strong><span>Fresh food at your door</span></div>
+        <div>🥗 <strong>Fresh & Tasty</strong><span>Made with care</span></div>
+        <div>💳 <strong>Easy Ordering</strong><span>Simple shopping experience</span></div>
+      </section>
+    </section>
+
+    <section class="app-screen" id="restaurantsScreen" data-screen="restaurants" hidden>
+      <div class="screen-heading">
+        <div>
+          <p class="eyebrow">LOCAL FAVOURITES</p>
+          <h1>Restaurants near you</h1>
+        </div>
+        <span class="location-chip" id="restaurantLocation">📍 Set delivery location</span>
+      </div>
+      <div class="restaurant-grid" id="restaurantGrid"></div>
+    </section>
+
+    <section class="app-screen" id="menuScreen" data-screen="menu" hidden>
+      <div class="screen-heading menu-screen-heading">
+        <div>
+          <p class="eyebrow">MADE FOR YOU</p>
+          <h1>Food Menu</h1>
+        </div>
+        <label class="search-box">
+          <span>🔍</span>
+          <input id="searchInput" type="search"
+                 placeholder="Search food..." aria-label="Search food">
+        </label>
+      </div>
+      <div class="categories menu-categories" id="menuCategories">
+        <button class="category active" data-category="All">🍽️<span>All</span></button>
+        <button class="category" data-category="Pizza">🍕<span>Pizza</span></button>
+        <button class="category" data-category="Burger">🍔<span>Burger</span></button>
+        <button class="category" data-category="Indian">🍛<span>Indian</span></button>
+        <button class="category" data-category="Dessert">🍰<span>Dessert</span></button>
+        <button class="category" data-category="Drinks">🥤<span>Drinks</span></button>
+      </div>
+      <div class="food-grid" id="foodGrid"></div>
+      <p id="emptyMessage" class="empty-message" hidden>
+        No food items found. Try another search.
+      </p>
+    </section>
+
+    <section class="app-screen" id="cartScreen" data-screen="cart" hidden>
+      <div class="screen-heading">
+        <div><p class="eyebrow">YOUR SELECTION</p><h1>Your Cart</h1></div>
+        <button class="text-button" data-screen-target="menu">← Continue browsing</button>
+      </div>
+      <div class="cart-screen-layout">
+        <div id="cartItems" class="cart-screen-items"></div>
+        <aside class="cart-summary">
+          <h2>Order summary</h2>
+          <div class="total-row"><span>Total</span><strong id="cartTotal">₹0</strong></div>
+          <button id="checkoutBtn" class="primary-button checkout-button">Proceed to Checkout</button>
+          <p class="demo-note">Demo only. No real payment is processed.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="app-screen" id="checkoutScreen" data-screen="checkout" hidden>
+      <div class="screen-heading">
+        <div><p class="eyebrow">SECURE CHECKOUT</p><h1>Checkout & Payment</h1></div>
+        <button id="closeCheckout" class="text-button" data-screen-target="cart">← Back to cart</button>
+      </div>
+      <div class="checkout-panel">
+        <div class="checkout-progress" id="checkoutProgress" aria-label="Order progress"></div>
+        <div id="checkoutContent" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="app-screen" id="trackingScreen" data-screen="tracking" hidden>
+      <div class="screen-heading">
+        <div><p class="eyebrow">ORDER STATUS</p><h1>Track Delivery</h1></div>
+      </div>
+      <div id="trackingContent" class="tracking-panel">
+        <div class="tracking-empty">
+          <span aria-hidden="true">🛵</span>
+          <h2>No active order</h2>
+          <p>Place an order and its delivery updates will appear here.</p>
+          <button class="primary-button" data-screen-target="restaurants">Browse restaurants</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="app-screen" id="profileScreen" data-screen="profile" hidden>
+      <div class="screen-heading">
+        <div><p class="eyebrow">YOUR ACCOUNT</p><h1>Profile</h1></div>
+      </div>
+      <form id="profileForm" class="profile-panel">
+        <div class="profile-avatar" aria-hidden="true">👤</div>
+        <div class="profile-fields">
+          <label for="profileName">Full name</label>
+          <input id="profileName" name="name" type="text" value="Foodie Customer" autocomplete="name">
+          <label for="profileLoginId">Login ID</label>
+          <input id="profileLoginId" name="loginId" type="text" placeholder="Email or username" autocomplete="username">
+          <label for="profilePhone">Phone number</label>
+          <input id="profilePhone" name="phone" type="tel" placeholder="Add phone number" autocomplete="tel">
+          <label for="profileAddress">Saved delivery address</label>
+          <input id="profileAddress" name="address" type="text" placeholder="Add delivery address" autocomplete="street-address">
+          <button class="primary-button" type="submit">Save profile</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="app-screen" id="flowchartScreen" data-screen="flowchart" hidden>
+      <div class="screen-heading">
+        <div><p class="eyebrow">ORDER JOURNEY</p><h1>Food Ordering Flowchart</h1></div>
+      </div>
+      <div class="flowchart" aria-label="Food ordering process flowchart">
+        <div class="flow-node flow-terminal">Start</div>
+        <span class="flow-arrow">↓</span>
+        <div class="flow-node">Open Food Delivery App</div>
+        <span class="flow-arrow">↓</span>
+        <div class="flow-node">Select Delivery Location</div>
+        <span class="flow-arrow">↓</span>
+        <div class="flow-node">Browse or Search for Food</div>
+        <span class="flow-arrow">↓</span>
+        <div class="flow-node">Select Restaurant and Food Item</div>
+        <span class="flow-arrow">↓</span>
+        <div class="flow-decision">Item available?</div>
+        <div class="flow-branches">
+          <div class="flow-branch flow-recovery"><strong>No</strong><span>Show unavailable message</span><span>Browse other food</span></div>
+          <div class="flow-branch flow-continue"><strong>Yes</strong><span>Add Item to Cart</span></div>
+        </div>
+        <span class="flow-arrow">↓</span>
+        <div class="flow-node">Review Cart and Total Amount</div>
+        <span class="flow-arrow">↓</span>
+        <div class="flow-node">Proceed to Checkout</div>
+        <span class="flow-arrow">↓</span>
+        <div class="flow-node">Select Payment Method and Confirm Order</div>
+        <span class="flow-arrow">↓</span>
+        <div class="flow-decision">Payment successful?</div>
+        <div class="flow-branches">
+          <div class="flow-branch flow-recovery"><strong>No</strong><span>Show payment error</span><span>Retry or change method</span></div>
+          <div class="flow-branch flow-continue"><strong>Yes</strong><span>Order Confirmation</span></div>
+        </div>
+        <span class="flow-arrow">↓</span>
+        <div class="flow-node">Track Delivery</div>
+        <span class="flow-arrow">↓</span>
+        <div class="flow-node flow-terminal">End: Order Delivered</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a href="#" class="logo">Food<span>ie.</span></a>
+    <p>Designed with ❤️ for a better food experience.</p>
+    <p>© 2026 Foodie. Student UI/UX Project.</p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="food.js"></script>
+</body>
+</html>
